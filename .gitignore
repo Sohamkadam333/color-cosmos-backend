@@ -19,3 +19,6 @@ package-lock.json
 # Ignore any generated files or build directories
 /build/
 /dist/
+
+demo2.py
+demp.py
