@@ -1,4 +1,6 @@
 const express = require('express');
+const fs = require('fs');
+const path = require('path');
 require('dotenv').config();
 const cors = require('cors');
 // const logger = require('./middleware/logger');
@@ -9,6 +11,7 @@ const mongoose = require('mongoose');
 // const bcrypt = require('bcrypt');
 const palateRouter = require('./routes/palateRoutes');
 const gradientRouter = require('./routes/gradientRoutes');
+const myLogger = require('./middleware/reqCount');
 // const userRouter = require('./routes/userRoutes');
 // const verifyToken = require('./middleware/checkAuth');
 // const verifyToken = require('./middleware/checkAuth');
@@ -18,12 +21,51 @@ const app = express();
 // MIDDLEWARES
 app.use(express.json());
 app.use(cors());
+
+// CORS ORIGIN
+app.use((req, res, next) => {
+	const allowedOrigins = [
+		'http://example.com',
+		'http://anotherexample.com',
+		'http://192.168.1.100:5500',
+		'https://chromewebstore.google.com/detail/color-cosmos/cjgholfdgchgianpgloflnmhpljbjaab',
+	];
+	const origin = req.headers.origin;
+
+	if (allowedOrigins.includes(origin)) {
+		res.setHeader('Access-Control-Allow-Origin', origin);
+		res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+		res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+		res.header('Access-Control-Allow-Credentials', true);
+
+		if (req.method === 'OPTIONS') {
+			res.sendStatus(200);
+		} else {
+			next();
+		}
+	} else {
+		res.status(403).json({ error: 'Origin not allowed' });
+	}
+});
+
+app.use(myLogger);
 // app.use(logger);
 
 // Home Page
 app.get('/api/v1', async (req, res) => {
-	res.status(200).json({
-		response: 'Success',
+	let jsonPath = path.join(__dirname, 'models', 'requestCount.log');
+	let reqCount;
+	fs.readFile(jsonPath, 'utf8', (err, data) => {
+		if (err) {
+			console.log('error');
+		} else {
+			console.log('Request Count = ', data);
+			reqCount = data;
+		}
+		res.status(200).json({
+			response: 'Success',
+			reqCount: reqCount,
+		});
 	});
 });
 
