@@ -22,7 +22,9 @@ app.use(cors());
 
 // Home Page
 app.get('/api/v1', async (req, res) => {
-	res.send('Home Page Success');
+	res.status(200).json({
+		response: 'Success',
+	});
 });
 
 // User Router
