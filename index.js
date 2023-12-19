@@ -48,27 +48,32 @@ app.use(cors(corsOptions));
 
 // Home Page
 app.get('/api/v1', async (req, res) => {
+	// local path
 	// let jsonPath = path.join(__dirname, 'middleware', 'requestCount.log');
-	// let reqCount;
-	// fs.readFile(jsonPath, 'utf8', (err, data) => {
-	// 	if (err) {
-	// 		console.log('error');
-	// 	} else {
-	// 		console.log('Request Count = ', data);
-	// 		reqCount = data;
-	// 	}
-	// 	res.status(200).json({
-	// 		response: 'Success',
-	// 		reqCount: reqCount,
-	// 	});
-	// });
 
-	// ***********
-	res.status(200).json({
-		response: 'Success',
-		//reqCount: reqCount,
-		mainDir: __dirname,
+	// server path
+	let jsonPath = path.join(__dirname, 'src', 'middleware', 'requestCount.log');
+	let reqCount;
+	fs.readFile(jsonPath, 'utf8', (err, data) => {
+		if (err) {
+			console.log('error');
+		} else {
+			console.log('Request Count = ', data);
+			reqCount = data;
+		}
+		res.status(200).json({
+			response: 'Success',
+			reqCount: reqCount,
+			mainDir: __dirname,
+		});
 	});
+
+	// *********** local testing
+	// res.status(200).json({
+	// 	response: 'Success',
+	// 	//reqCount: reqCount,
+	// 	mainDir: __dirname,
+	// });
 });
 
 // User Router
