@@ -6,7 +6,7 @@ const myLogger = async function (req, res, next) {
 	// let jsonPath = path.join(__dirname, 'requestCount.log');
 
 	// for server
-	let jsonPath = path.join(__dirname);
+	let jsonPath = path.join(__dirname, 'requestCount.log');
 
 	console.log('reqCount Dir name', jsonPath);
 	let requestCount;
