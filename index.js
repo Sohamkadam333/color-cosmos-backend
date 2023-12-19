@@ -29,6 +29,7 @@ app.use((req, res, next) => {
 		'http://anotherexample.com',
 		'http://192.168.1.100:5500',
 		'https://chromewebstore.google.com/detail/color-cosmos/cjgholfdgchgianpgloflnmhpljbjaab',
+		'chrome-extension://cjgholfdgchgianpgloflnmhpljbjaab/',
 	];
 	const origin = req.headers.origin;
 
