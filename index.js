@@ -73,6 +73,7 @@ app.get('/api/v1', async (req, res) => {
 			response: 'Success',
 			reqCount: reqCount,
 			mainDir: __dirname,
+			middlewarePath: jsonPath,
 		});
 	});
 
