@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const myLogger = async function (req, res, next) {
-	let jsonPath = path.join(__dirname, '..', 'models', 'requestCount.log');
+	let jsonPath = path.join(__dirname, 'requestCount.log');
 	console.log(jsonPath);
 	let requestCount;
 	let requestCountString;

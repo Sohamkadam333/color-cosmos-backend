@@ -48,7 +48,7 @@ app.use(myLogger);
 
 // Home Page
 app.get('/api/v1', async (req, res) => {
-	let jsonPath = path.join(__dirname, 'models', 'requestCount.log');
+	let jsonPath = path.join(__dirname, 'middleware', 'requestCount.log');
 	let reqCount;
 	fs.readFile(jsonPath, 'utf8', (err, data) => {
 		if (err) {
