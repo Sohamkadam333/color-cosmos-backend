@@ -21,6 +21,9 @@ const app = express();
 // MIDDLEWARES
 app.use(express.json());
 
+// ALLOW ALL
+app.use(cors());
+
 // CORS ORIGIN
 // List of allowed origins (add your extension ID and three additional origins)
 // const allowedOrigins = [
@@ -47,11 +50,8 @@ app.use(express.json());
 
 // app.use(cors(corsOptions));
 
-// app.use(myLogger);
+app.use(myLogger);
 // app.use(logger);
-
-// ALLOW ALL
-app.use(cors());
 
 // Home Page
 app.get('/api/v1', async (req, res) => {
@@ -63,7 +63,7 @@ app.get('/api/v1', async (req, res) => {
 	let reqCount;
 	fs.readFile(jsonPath, 'utf8', (err, data) => {
 		if (err) {
-			console.log('error');
+			console.log('error reading file', jsonPath);
 		} else {
 			console.log('Request Count = ', data);
 			reqCount = data;
