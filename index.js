@@ -23,32 +23,35 @@ app.use(express.json());
 
 // CORS ORIGIN
 // List of allowed origins (add your extension ID and three additional origins)
-const allowedOrigins = [
-	'chrome-extension://cjgholfdgchgianpgloflnmhpljbjaab/',
-	'https://allowed-origin-1.com',
-	'https://color-cosmos.onrender.com/',
-];
+// const allowedOrigins = [
+// 	'chrome-extension://cjgholfdgchgianpgloflnmhpljbjaab/',
+// 	'https://allowed-origin-1.com',
+// 	'https://color-cosmos.onrender.com/',
+// ];
 
 // Configure CORS to allow requests only from specified origins
-const corsOptions = {
-	origin: (origin, callback) => {
-		if (allowedOrigins.includes(origin) || !origin) {
-			// Allow requests from specified origins or non-browser clients (e.g., mobile apps)
-			callback(null, true);
-		} else {
-			// Reject requests from other origins
-			callback(new Error('Origin Not Allowed'));
-		}
-	},
-	methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-	credentials: true,
-	optionsSuccessStatus: 204,
-};
+// const corsOptions = {
+// 	origin: (origin, callback) => {
+// 		if (allowedOrigins.includes(origin) || !origin) {
+// 			// Allow requests from specified origins or non-browser clients (e.g., mobile apps)
+// 			callback(null, true);
+// 		} else {
+// 			// Reject requests from other origins
+// 			callback(new Error('Origin Not Allowed'));
+// 		}
+// 	},
+// 	methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+// 	credentials: true,
+// 	optionsSuccessStatus: 204,
+// };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
 // app.use(myLogger);
 // app.use(logger);
+
+// ALLOW ALL
+app.use(cors());
 
 // Home Page
 app.get('/api/v1', async (req, res) => {
