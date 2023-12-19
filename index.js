@@ -98,6 +98,31 @@ app.use('/api/v1/', gradientRouter);
 
 // app.use(pageNotFound);
 
+// TEXT GET REQUEST START
+const filePath = path.join(__dirname, 'database', 'reqCount.txt');
+
+app.get('/readCount', (req, res) => {
+	// Read the content of reqCount.txt with the callback style
+	let fileDataNumber;
+	let fileDataString;
+	fs.readFile(filePath, 'utf-8', (err, fileContent) => {
+		if (err) {
+			console.error('Error reading reqCount.txt:', err);
+			res.status(500).send('Internal Server Error');
+		} else {
+			fileDataNumber = Number(fileContent);
+			fileDataString = ++fileDataNumber;
+
+			fs.writeFile(filePath, String(fileDataString), (err) => {
+				// console.log(err);
+			});
+
+			res.send(`Request Count: ${fileContent}`);
+		}
+	});
+});
+// TEST GET REQUEST END
+
 // CONNECT TO DB
 const connectToDB = async (url) => {
 	try {
