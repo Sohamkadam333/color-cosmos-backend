@@ -43,24 +43,31 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-app.use(myLogger);
+// app.use(myLogger);
 // app.use(logger);
 
 // Home Page
 app.get('/api/v1', async (req, res) => {
-	let jsonPath = path.join(__dirname, 'middleware', 'requestCount.log');
-	let reqCount;
-	fs.readFile(jsonPath, 'utf8', (err, data) => {
-		if (err) {
-			console.log('error');
-		} else {
-			console.log('Request Count = ', data);
-			reqCount = data;
-		}
-		res.status(200).json({
-			response: 'Success',
-			reqCount: reqCount,
-		});
+	// let jsonPath = path.join(__dirname, 'middleware', 'requestCount.log');
+	// let reqCount;
+	// fs.readFile(jsonPath, 'utf8', (err, data) => {
+	// 	if (err) {
+	// 		console.log('error');
+	// 	} else {
+	// 		console.log('Request Count = ', data);
+	// 		reqCount = data;
+	// 	}
+	// 	res.status(200).json({
+	// 		response: 'Success',
+	// 		reqCount: reqCount,
+	// 	});
+	// });
+
+	// ***********
+	res.status(200).json({
+		response: 'Success',
+		//reqCount: reqCount,
+		mainDir: __dirname,
 	});
 });
 

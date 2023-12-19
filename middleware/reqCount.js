@@ -8,19 +8,19 @@ const myLogger = async function (req, res, next) {
 	let requestCountString;
 	fs.readFile(jsonPath, 'utf8', (err, data) => {
 		if (err) {
-			console.log('Error', err);
+			// console.log('Error', err);
 		} else {
-			console.log('Data', data);
+			// console.log('Data', data);
 			requestCount = Number(data);
-			console.log('RequestCount int type =', typeof requestCount);
-			console.log('RequestCount int =', requestCount);
+			// console.log('RequestCount int type =', typeof requestCount);
+			// console.log('RequestCount int =', requestCount);
 			requestCountString = ++requestCount;
-			console.log('RequestCountString type =', typeof requestCountString);
-			console.log('RequestCountString = ', requestCountString);
+			// console.log('RequestCountString type =', typeof requestCountString);
+			// console.log('RequestCountString = ', requestCountString);
 		}
 
 		fs.writeFile(jsonPath, String(requestCountString), (err) => {
-			console.log(err);
+			// console.log(err);
 		});
 	});
 
