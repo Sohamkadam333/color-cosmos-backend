@@ -6,9 +6,9 @@ const myLogger = async function (req, res, next) {
 	// let jsonPath = path.join(__dirname, 'requestCount.log');
 
 	// for server
-	let jsonPath = path.join(__dirname, '..', 'src', 'middleware', 'requestCount.log');
+	let jsonPath = path.join(__dirname);
 
-	console.log(jsonPath);
+	console.log('reqCount Dir name', jsonPath);
 	let requestCount;
 	let requestCountString;
 	fs.readFile(jsonPath, 'utf8', (err, data) => {
