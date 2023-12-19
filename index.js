@@ -59,7 +59,7 @@ app.get('/api/v1', async (req, res) => {
 	// let jsonPath = path.join(__dirname, 'middleware', 'requestCount.log');
 
 	// server path
-	let jsonPath = path.join(__dirname);
+	let jsonPath = path.join(__dirname, 'middleware', 'requestCount.log');
 	console.log('Home dir path =', jsonPath);
 	let reqCount;
 	fs.readFile(jsonPath, 'utf8', (err, data) => {
