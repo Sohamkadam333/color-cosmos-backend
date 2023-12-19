@@ -23,7 +23,11 @@ app.use(express.json());
 
 // CORS ORIGIN
 // List of allowed origins (add your extension ID and three additional origins)
-const allowedOrigins = ['chrome-extension://cjgholfdgchgianpgloflnmhpljbjaab/', 'https://allowed-origin-1.com'];
+const allowedOrigins = [
+	'chrome-extension://cjgholfdgchgianpgloflnmhpljbjaab/',
+	'https://allowed-origin-1.com',
+	'https://color-cosmos.onrender.com/',
+];
 
 // Configure CORS to allow requests only from specified origins
 const corsOptions = {
