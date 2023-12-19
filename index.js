@@ -20,34 +20,28 @@ const app = express();
 
 // MIDDLEWARES
 app.use(express.json());
-app.use(cors());
 
 // CORS ORIGIN
-app.use((req, res, next) => {
-	const allowedOrigins = [
-		'http://example.com',
-		'http://anotherexample.com',
-		'http://192.168.1.100:5500',
-		'https://chromewebstore.google.com/detail/color-cosmos/cjgholfdgchgianpgloflnmhpljbjaab',
-		'chrome-extension://cjgholfdgchgianpgloflnmhpljbjaab/',
-	];
-	const origin = req.headers.origin;
+// List of allowed origins (add your extension ID and three additional origins)
+const allowedOrigins = ['chrome-extension://cjgholfdgchgianpgloflnmhpljbjaab/', 'https://allowed-origin-1.com'];
 
-	if (allowedOrigins.includes(origin)) {
-		res.setHeader('Access-Control-Allow-Origin', origin);
-		res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-		res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-		res.header('Access-Control-Allow-Credentials', true);
-
-		if (req.method === 'OPTIONS') {
-			res.sendStatus(200);
+// Configure CORS to allow requests only from specified origins
+const corsOptions = {
+	origin: (origin, callback) => {
+		if (allowedOrigins.includes(origin) || !origin) {
+			// Allow requests from specified origins or non-browser clients (e.g., mobile apps)
+			callback(null, true);
 		} else {
-			next();
+			// Reject requests from other origins
+			callback(new Error('Origin Not Allowed'));
 		}
-	} else {
-		res.status(403).json({ error: 'Origin not allowed' });
-	}
-});
+	},
+	methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+	credentials: true,
+	optionsSuccessStatus: 204,
+};
+
+app.use(cors(corsOptions));
 
 app.use(myLogger);
 // app.use(logger);
