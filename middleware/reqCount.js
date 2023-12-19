@@ -49,6 +49,13 @@ const myLogger = async function (req, res, next) {
 			fileDataNumber = Number(fileContent);
 			fileDataString = ++fileDataNumber;
 
+			console.log('request count =', fileDataNumber);
+			console.log(req.protocol); // "https"
+			console.log(req.hostname); // "example.com"
+			console.log(req.path); // "/creatures"
+			console.log(req.originalUrl); // "/creatures?filter=sharks"
+			console.log(req.subdomains); // "['ocean']
+
 			fs.writeFile(filePath, String(fileDataString), (err) => {
 				// console.log(err);
 			});

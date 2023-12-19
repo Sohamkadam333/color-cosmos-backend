@@ -66,8 +66,6 @@ app.get('/api/v1', async (req, res) => {
 		if (err) {
 			console.log('error reading file', jsonPath);
 		} else {
-			console.log('request count below');
-			console.log(data);
 			reqCount = data;
 		}
 		res.status(200).json({
